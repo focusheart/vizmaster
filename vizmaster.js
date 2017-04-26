@@ -14,6 +14,7 @@ win.width = window.innerWidth;
 win.height = window.innerHeight;
 
 // [ url, seconds ]
+var mypages_json_url = "./mypages.json";
 var pages_json_url = "./pages.json";
 var pages = [];
 var idx = -1;
@@ -74,11 +75,30 @@ function on_window_resize() {
 
 window.addEventListener( 'resize', on_window_resize, false );
 
-fetch(pages_json_url)
+fetch(mypages_json_url)
     .then(function(rsp) {
-        return rsp.json();
-    }).then(function(json) {
-        pages = json['pages'];
-        show_next();
-        countdown();
+        if (rsp.ok) {
+            rsp.json().then(function(json) {
+                pages = json['pages'];
+                document.getElementById('sbar').setAttribute('style', 'display:block');
+                show_next();
+                countdown();
+            });
+        } else {
+            console.log("! error: " + rsp.status);
+        }
+
+    }, function(ex) {
+        console.log(ex);
+
+        // try another json file
+        fetch(pages_json_url)
+            .then(function(rsp) {
+                return rsp.json();
+            }).then(function(json) {
+                pages = json['pages'];
+                document.getElementById('sbar').setAttribute('style', 'display:block');
+                show_next();
+                countdown();
+            });
     });
