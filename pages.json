@@ -1,6 +1,6 @@
 {
     "pages": [
-        ["http://silkroad.9lou.org/", 5],
+        ["http://silkroad.9lou.org/", 30],
         ["http://silkroad.9lou.org/static/html/function1.html", 30],
         ["http://silkroad.9lou.org/static/html/function2.html", 30],
         ["http://silkroad.9lou.org/static/html/function2_top500.html", 30],
@@ -13,7 +13,6 @@
         ["http://silkroad.9lou.org/static/html/function9.html", 30],
         ["http://silkroad.9lou.org/static/html/function10.html", 30],
         ["http://srkrp.9lou.org/", 30],
-        ["http://202.117.16.125:60420/", 120],
         ["http://mbbo.9lou.org/ver-pixi.js.html", 60]
     ]
 }
