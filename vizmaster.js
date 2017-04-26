@@ -67,6 +67,13 @@ function countdown() {
     setTimeout("countdown();", 1000);
 }
 
+function on_window_resize() {
+    win.width = window.innerWidth;
+    win.height = window.innerHeight;
+}
+
+window.addEventListener( 'resize', on_window_resize, false );
+
 fetch(pages_json_url)
     .then(function(rsp) {
         return rsp.json();
