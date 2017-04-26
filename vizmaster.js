@@ -14,6 +14,7 @@ win.width = window.innerWidth;
 win.height = window.innerHeight;
 
 // [ url, seconds ]
+var pages_json_url = "./pages.json";
 var pages = [];
 var idx = -1;
 var iso = null;
@@ -66,7 +67,7 @@ function countdown() {
     setTimeout("countdown();", 1000);
 }
 
-fetch("pages.json")
+fetch(pages_json_url)
     .then(function(rsp) {
         return rsp.json();
     }).then(function(json) {
