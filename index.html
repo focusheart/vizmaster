@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8"/>
+<title>Viz Auto Show</title>
+<style>
+html,body { margin:0; padding:0; overflow:hidden; }
+a { text-decoration: none; }
+#sbar { position: absolute; bottom: 0; right: 20px; width: 550px; height: 20px;
+  line-height: 20px; font-size: 16px; color: white; background: rgba(0,0,0,0.5);
+  z-index:999; text-align: right: padding: 0 16px 0 0; }
+#sbar-ctd { width: 40px; float: left; font-size: 12px; color: #333333; text-align: center; 
+  border-right: 1px solid #666666; }
+#sbar-msg { width: 400px; float: left; font-size: 12px; color: white; text-align: center; }
+#sbar-msg * { color: white; }
+#sbar-msg a { text-decoration: underline; }
+#sbar-btn { width: 100px; float: right; }
+#sbar-btn .btn { display: inline; color: grey; float: left; font-size: 12px; margin: 0 0 0 3px;
+  padding: 0 4px; background: black; }
+#sbar-btn .btn:hover { color: white; font-weight: bold; }
+
+#vizmaster-win { z-index:0; }
+</style>
+</head>
+<body>
+<div id="sbar">
+  <div id="sbar-ctd"></div>
+  <div id="sbar-msg"></div>
+  <div id="sbar-btn">
+    <a href="javascript:toggle_pause();" id="btn-pause" class="btn" title="Pause or Un-Pause the auto show">Pause</a>
+    <a href="javascript:prev();" id="btn-prev" class="btn" title="Goto Previous Page">&lt;</a>
+    <a href="javascript:next();" id="btn-next" class="btn" title="Goto Next Page">&gt;</a>
+  </div>
+</div>
+<iframe id="vizmaster-win" src="" width="100%" height="100%" frameborder="0"></iframe>
+<script type="text/javascript" src="vizmaster.js"></script>
+</body>
+</html>
