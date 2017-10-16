@@ -3,7 +3,7 @@ A controller for web visualizations presentation
 
 ## Usage
 
-It's very simple! Just edit the `pages.json` file! Follow the format:
+It's very simple! Just edit the `pages.json` file! Or you can create a new file named `mypages.json`. Follow the format:
 
     ["http://your_url", seconds_to_count_down ],
 
