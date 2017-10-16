@@ -17,26 +17,15 @@ win.height = window.innerHeight;
 var mypages_json_url = "./mypages.json";
 var pages_json_url = "./pages.json";
 var pages = [];
-var idx = -1;
+var idx = 0;
 var iso = null;
 var is_pause = false;
 var ctd_seconds = 0;
 
-function show_next() {
-    if (!is_pause) {
-        // Update idx
-        idx += 1;
-        if (idx >= pages.length) {
-            idx = 0;
-        }
-
-        var url = pages[idx][0];
-        msg("PAGE: <a target='_blank' href='"+url+"'>"+url+"</a>");
-        win.src = url;
-    }
-
-    // show next page after dur
-    iso = setTimeout("show_next();", pages[idx][1] * 1000);
+function show() {
+    var url = pages[idx][0];
+    msg("PAGE: <a target='_blank' href='"+url+"'>"+url+"</a>");
+    win.src = url;
     ctd_seconds = pages[idx][1];
 }
 
@@ -51,20 +40,27 @@ function pause() {
 }
 
 function prev() {
-    idx = idx==0? (pages.length-2) : (idx-2);
-    clearTimeout(iso);
-    show_next();
+    idx = idx==0? (pages.length-1) : (idx-1);
+    show();
 }
 
 function next() {
-    idx = idx==(pages.length-1)? -1 : (idx);
-    clearTimeout(iso);
-    show_next();
+    idx = idx==(pages.length-1)? 0 : (idx+1);
+    show();
 }
 
 function countdown() {
-    document.getElementById('sbar-ctd').innerHTML = ctd_seconds;
-    ctd_seconds -= 1;
+    if (is_pause) {
+        // Do nothing if is paused
+    } else {
+        // Update the ctd
+        if (ctd_seconds==0) {
+            next();
+        } else {
+            ctd_seconds -= 1;
+            document.getElementById('sbar-ctd').innerHTML = ctd_seconds;
+        }
+    }
     setTimeout("countdown();", 1000);
 }
 
@@ -81,7 +77,7 @@ fetch(mypages_json_url)
             rsp.json().then(function(json) {
                 pages = json['pages'];
                 document.getElementById('sbar').setAttribute('style', 'display:block');
-                show_next();
+                show();
                 countdown();
             });
         } else {
@@ -98,7 +94,7 @@ fetch(mypages_json_url)
             }).then(function(json) {
                 pages = json['pages'];
                 document.getElementById('sbar').setAttribute('style', 'display:block');
-                show_next();
+                show();
                 countdown();
             });
     });
